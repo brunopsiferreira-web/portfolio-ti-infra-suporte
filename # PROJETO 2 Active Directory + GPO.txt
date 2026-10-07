@@ -1,0 +1,266 @@
+# PROJETO 2: Active Directory + GPO
+
+**Objetivo:** montar o "coração" de uma rede corporativa pequena: um domínio, usuários, grupos, políticas de segurança e rotinas de suporte (reset de senha, desbloqueio).
+
+## 2.1 Planejamento (faça um diagrama, mesmo simples)
+| Item | Servidor | Cliente |
+|---|---|---|
+| Nome | `SRV-DC01` | `PC-CLI01` |
+| SO | Windows Server 2022 (Desktop Experience) | Windows 11 Enterprise / 10 Pro |
+| RAM / Disco | 4 GB / 50 GB | 4 GB / 40 GB |
+| Adaptador | Rede Interna `labnet` | Rede Interna `labnet` |
+| IP | 192.168.10.10 /24 | 192.168.10.20 /24 |
+| DNS | 192.168.10.10 (ele mesmo) | 192.168.10.10 |
+
+- Domínio: `lab.local` (NetBIOS: `LAB`)
+- Dica: adicione um **2º adaptador NAT** no servidor e no cliente se quiser internet para atualizações. Nesse caso configure o IP estático **apenas** no adaptador da rede interna e deixe o NAT em DHCP. Para o laboratório básico, só a rede interna basta.
+
+## 2.2 Passo a passo
+
+### Passo 1: Criar e preparar a VM do servidor
+1. No VirtualBox: Nova VM > Windows Server 2022 > 4 GB RAM, 2 CPUs, 50 GB.
+2. Instale escolhendo **Standard (Desktop Experience)**.
+3. Defina a senha do Administrador (ex.: `Lab@12345`, fictícia).
+admin@123 - senha
+4. Adaptador de rede = Rede Interna `labnet`.
+5. Snapshot `so-instalado`.
+
+### Passo 2: Nome e IP fixo (PowerShell como administrador)
+```powershell
+Get-NetAdapter                                   # anote o nome (ex.: Ethernet)
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.10.10 -PrefixLength 24
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.10.10
+Rename-Computer -NewName "SRV-DC01" -Restart
+```
+
+### Passo 3: Instalar AD DS e promover a controlador de domínio
+```powershell
+Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+
+Install-ADDSForest `
+  -DomainName "lab.local" `
+  -DomainNetbiosName "LAB" `
+  -InstallDns `
+  -SafeModeAdministratorPassword (ConvertTo-SecureString "Restore@12345" -AsPlainText -Force) `
+  -Force
+```
+A VM reinicia sozinha. Agora você entra como `LAB\Administrator`.
+Verifique: `Get-ADDomain` e `Get-Service NTDS, DNS`. **Snapshot `dc-pronto`.**
+
+> Alternativa gráfica: Gerenciador do Servidor > Adicionar funções > AD DS > "Promover este servidor a controlador de domínio". Para o vídeo, a versão gráfica mostra bem o processo.
+
+### Passo 4: Estrutura de OUs
+```powershell
+$base = "DC=lab,DC=local"
+New-ADOrganizationalUnit -Name "Empresa" -Path $base
+New-ADOrganizationalUnit -Name "Usuarios" -Path "OU=Empresa,$base"
+New-ADOrganizationalUnit -Name "Computadores" -Path "OU=Empresa,$base"
+New-ADOrganizationalUnit -Name "Grupos" -Path "OU=Empresa,$base"
+foreach ($d in "TI","RH","Financeiro") {
+  New-ADOrganizationalUnit -Name $d -Path "OU=Usuarios,OU=Empresa,$base"
+}
+```
+Estrutura resultante:
+```
+lab.local
+└── Empresa
+    ├── Usuarios (TI, RH, Financeiro)
+    ├── Computadores
+    └── Grupos
+```
+
+### Passo 5: Grupos e usuários
+```powershell
+$base = "DC=lab,DC=local"
+foreach ($d in "TI","RH","Financeiro") {
+  New-ADGroup -Name "GRP_$d" -GroupScope Global -GroupCategory Security -Path "OU=Grupos,OU=Empresa,$base"
+}
+
+$senha = ConvertTo-SecureString "Trocar@123" -AsPlainText -Force
+New-ADUser -Name "Maria Souza" -GivenName Maria -Surname Souza -SamAccountName maria.souza `
+  -UserPrincipalName maria.souza@lab.local -Path "OU=RH,OU=Usuarios,OU=Empresa,$base" `
+  -AccountPassword $senha -Enabled $true -ChangePasswordAtLogon $true
+New-ADUser -Name "Carlos Lima" -GivenName Carlos -Surname Lima -SamAccountName carlos.lima `
+  -UserPrincipalName carlos.lima@lab.local -Path "OU=Financeiro,OU=Usuarios,OU=Empresa,$base" `
+  -AccountPassword $senha -Enabled $true -ChangePasswordAtLogon $true
+
+Add-ADGroupMember -Identity GRP_RH -Members maria.souza
+Add-ADGroupMember -Identity GRP_Financeiro -Members carlos.lima
+```
+(No Projeto 3 você automatiza isso com um CSV.)
+
+### Passo 6: Preparar o cliente e ingressar no domínio
+1. Crie a VM cliente (Windows 11 Enterprise/10 Pro), rede interna `labnet`.
+2. IP fixo e DNS apontando para o DC:
+   ```powershell
+   New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.10.20 -PrefixLength 24
+   Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.10.10
+   ```
+3. Teste: `ping 192.168.10.10` e `nslookup lab.local` (deve resolver). **Se o DNS não aponta para o DC, o ingresso falha: esse é o erro nº 1.**
+4. Ingressar:
+   ```powershell
+   Add-Computer -DomainName "lab.local" -Credential LAB\Administrator -NewName "PC-CLI01" -Restart
+   ```
+5. Após reiniciar, logue com `LAB\maria.souza` (vai pedir troca de senha).
+6. No DC, mova o computador para a OU certa:
+   ```powershell
+   Get-ADComputer PC-CLI01 | Move-ADObject -TargetPath "OU=Computadores,OU=Empresa,DC=lab,DC=local"
+   ```
+7. **Snapshot `cliente-no-dominio`** (nas duas VMs).
+
+### Passo 7: Pasta compartilhada (para a GPO de unidade de rede)
+No DC:
+```powershell
+New-Item -Path C:\Compartilhado\Financeiro -ItemType Directory -Force
+New-SmbShare -Name "Financeiro" -Path "C:\Compartilhado\Financeiro" -FullAccess "LAB\GRP_Financeiro"
+```
+Depois ajuste a aba **Segurança** (NTFS) da pasta: remova "Usuários" e deixe só `GRP_Financeiro` (Modificar) e Administradores. Explique no README a diferença entre permissão de compartilhamento e permissão NTFS (a mais restritiva prevalece).
+
+### Passo 8: Criar as GPOs
+Abra **Gerenciamento de Política de Grupo** (`gpmc.msc`) no DC.
+
+**GPO 1: Bloquear Painel de Controle (usuários RH)**
+1. Botão direito na OU `RH` > "Criar um GPO neste domínio e vinculá-lo aqui" > nome `GPO_BloquearPainelControle`.
+2. Editar > *Configuração do Usuário > Políticas > Modelos Administrativos > Painel de Controle* > **Proibir o acesso ao Painel de Controle e às configurações do PC** = Habilitado.
+
+**GPO 2: Mapear unidade de rede (Financeiro)**
+1. Vincule à OU `Financeiro`: `GPO_MapearUnidadeFinanceiro`.
+2. *Configuração do Usuário > Preferências > Configurações do Windows > Mapeamentos de Unidade* > Novo > Unidade mapeada.
+3. Ação: Criar. Local: `\\SRV-DC01\Financeiro`. Letra: `F:`. Rótulo: "Financeiro".
+
+**GPO 3: Política de senha e bloqueio (todo o domínio)**
+1. Edite a **Default Domain Policy** (senha de domínio só vale nesse nível).
+2. *Configuração do Computador > Políticas > Configurações do Windows > Configurações de Segurança > Políticas de Conta*:
+   - Política de senha: comprimento mínimo **8**, complexidade **Habilitada**, validade máxima **90 dias**
+   - Política de bloqueio de conta: limite **3 tentativas**, duração **15 minutos**, redefinir contador após **15 minutos**
+
+**GPO 4 (opcional, bônus): papel de parede corporativo ou bloquear USB**
+- Papel de parede: *Configuração do Usuário > Modelos Administrativos > Área de Trabalho > Área de Trabalho > Papel de parede da área de trabalho*.
+
+### Passo 9: Aplicar e validar (no cliente)
+```cmd
+gpupdate /force
+gpresult /r
+gpresult /h C:\relatorio-gpo.html
+```
+- Logue com `maria.souza`: Painel de Controle deve estar bloqueado.
+- Logue com `carlos.lima`: unidade `F:` aparece.
+- Tire prints do `gpresult` mostrando a GPO aplicada.
+
+### Passo 10: Cenários de suporte (o "pulo do gato" do projeto)
+**A) "Esqueci minha senha"**
+```powershell
+Set-ADAccountPassword -Identity maria.souza -Reset -NewPassword (ConvertTo-SecureString "Nova@12345" -AsPlainText -Force)
+Set-ADUser -Identity maria.souza -ChangePasswordAtLogon $true
+```
+(Ou pelo console: *Usuários e Computadores do AD* > botão direito no usuário > Redefinir senha.)
+
+**B) "Minha conta bloqueou"**
+1. No cliente, erre a senha de `carlos.lima` 3 vezes.
+2. No DC:
+   ```powershell
+   Search-ADAccount -LockedOut | Select Name, SamAccountName, LockedOut
+   Unlock-ADAccount -Identity carlos.lima
+   ```
+3. Descubra a origem do bloqueio no log de segurança do DC (evento **4740**).
+
+**C) "Preciso de acesso à pasta do Financeiro"**
+`Add-ADGroupMember -Identity GRP_Financeiro -Members novo.usuario` (mostra que se dá acesso por **grupo**, não por usuário).
+
+**D) Usuário desligado da empresa**
+```powershell
+Disable-ADAccount -Identity maria.souza
+Move-ADObject -Identity (Get-ADUser maria.souza).DistinguishedName -TargetPath "OU=Desativados,OU=Empresa,DC=lab,DC=local"
+```
+(Crie antes a OU `Desativados`.)
+
+## 2.3 Problemas comuns (coloque no README: demonstra aprendizado)
+| Problema | Causa | Solução |
+|---|---|---|
+| "Não foi possível localizar o domínio" | DNS do cliente não aponta para o DC | Ajustar DNS do cliente |
+| Falha ao ingressar no domínio | Windows Home, relógio diferente, firewall | Usar Pro/Enterprise, sincronizar hora |
+| GPO não aplica | OU errada, escopo, não rodou `gpupdate` | `gpresult /r`, conferir vínculo |
+| Senha recusada ao trocar | Não atende complexidade | Seguir política |
+
+## 2.4 README da pasta `02-active-directory`
+````markdown
+# Projeto 2: Active Directory e Políticas de Grupo (GPO)
+
+## Objetivo
+Construir um domínio Windows (lab.local) com estrutura de OUs, grupos, usuários e GPOs,
+e resolver chamados típicos de suporte (reset de senha, desbloqueio de conta, permissão de acesso).
+
+## Topologia
+| Máquina | SO | IP | Função |
+|---|---|---|---|
+| SRV-DC01 | Windows Server 2022 | 192.168.10.10 | AD DS, DNS, servidor de arquivos |
+| PC-CLI01 | Windows 11 Enterprise | 192.168.10.20 | Estação de trabalho |
+
+(Inclua aqui o diagrama: prints/topologia.png)
+
+## Estrutura do AD
+(árvore de OUs)
+
+## O que foi implementado
+- [x] Promoção do controlador de domínio via PowerShell
+- [x] OUs por departamento, grupos de segurança (GRP_TI, GRP_RH, GRP_Financeiro)
+- [x] Ingresso de estação no domínio
+- [x] GPO: bloqueio do Painel de Controle (RH)
+- [x] GPO: mapeamento de unidade de rede (Financeiro)
+- [x] GPO: política de senha e bloqueio de conta (domínio)
+- [x] Compartilhamento com permissões por grupo (SMB + NTFS)
+
+## Chamados simulados
+1. Esqueci minha senha → `Set-ADAccountPassword`
+2. Conta bloqueada → `Search-ADAccount -LockedOut` / `Unlock-ADAccount`
+3. Acesso a pasta → inclusão em grupo
+4. Desligamento → desativação e movimentação de conta
+
+## Como reproduzir
+Passo a passo numerado com prints (ver `passo-a-passo.md`).
+
+## Problemas encontrados e soluções
+(tabela)
+
+## Aprendizados
+(3 a 5 pontos)
+
+## Vídeo
+[Demonstração no YouTube]()
+````
+
+## 2.5 Roteiro do vídeo (5 a 7 min)
+1. Topologia (diagrama) em 20s.
+2. Console do AD com OUs/usuários/grupos.
+3. Cliente logando com usuário do domínio.
+4. GPO aplicando: Painel de Controle bloqueado e unidade F: aparecendo.
+5. Chamado: bloquear a conta, mostrar `Search-ADAccount`, desbloquear.
+6. Fechamento: onde achar o passo a passo.
+
+## 2.6 Post de LinkedIn (Projeto 2)
+```
+🖥️ Montei um domínio Active Directory do zero num laboratório virtual, e aprendi mais do que em muita aula.
+
+Usando VirtualBox, subi um Windows Server 2022 como controlador de domínio (lab.local), criei a
+estrutura de OUs por departamento, grupos de segurança e usuários, e ingressei uma estação Windows
+no domínio.
+
+O que coloquei em prática:
+✅ GPO para bloquear o Painel de Controle em um departamento
+✅ GPO para mapear automaticamente unidade de rede por grupo
+✅ Política de senha e bloqueio de conta para todo o domínio
+✅ Compartilhamento com permissões de SMB + NTFS por grupo
+✅ Chamados simulados: reset de senha, conta bloqueada (Unlock-ADAccount), liberação de acesso
+
+O maior aprendizado: 90% dos problemas de ingresso no domínio são DNS. Se o cliente não aponta
+para o DC, nada funciona. 😅
+
+Como venho de sistemas corporativos (parametrização e regras de negócio), foi muito interessante
+ver o outro lado: a infraestrutura que sustenta esses sistemas.
+
+📂 Passo a passo, scripts e vídeo no GitHub: [link]
+
+#ActiveDirectory #WindowsServer #GPO #suporteTI #infraestrutura #PowerShell #TI
+```
+
+---
