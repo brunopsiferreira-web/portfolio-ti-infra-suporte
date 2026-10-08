@@ -54,9 +54,9 @@ Cada linha leva direto à documentação do cenário e ao vídeo, sem precisar n
 | # | Problema | Camada | Ferramentas | Documentação | Vídeo |
 |:-:|---|---|---|:-:|:-:|
 | 1 | Sem internet (gateway incorreto) | Rede | `ipconfig` `ping` `netsh` | [Abrir](01-cenarios-troubleshooting/01-sem-internet/) | [▶](https://www.youtube.com/watch?v=82-pPgGI5r8) |
-| 2 | Conta de usuário bloqueada | Contas | `net user` | [Abrir](01-cenarios-troubleshooting/02-conta-bloqueada/) | [▶](LINK_DO_VIDEO) |
-| 3 | Computador lento | Desempenho | `Get-Process` | [Abrir](01-cenarios-troubleshooting/03-computador-lento/) | [▶](LINK_DO_VIDEO) |
-| 4 | Disco cheio | Armazenamento | `Get-PSDrive` `cleanmgr` | [Abrir](01-cenarios-troubleshooting/04-disco-cheio/) | [▶](LINK_DO_VIDEO) |
+| 2 | Conta de usuário bloqueada | Contas | `net user` | [Abrir](01-cenarios-troubleshooting/02-conta-bloqueada/) | [▶](https://youtu.be/afGEmjUGr0Q) |
+| 3 | Computador lento | Desempenho | `Get-Process` | [Abrir](01-cenarios-troubleshooting/03-computador-lento/) | [▶](https://youtu.be/g6M5FmyJHlQ) |
+| 4 | Disco cheio | Armazenamento | `Get-PSDrive` `cleanmgr` | [Abrir](01-cenarios-troubleshooting/04-disco-cheio/) | [▶](https://youtu.be/vycYgaiN3Ug) |
 
 ---
 
