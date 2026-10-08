@@ -64,10 +64,17 @@ Todo o passo a passo, com comandos e validações: **[passo-a-passo.md](passo-a-
 | GPO não aplica | OU errada, vínculo ou falta de atualização | `gpupdate /force` e `gpresult /r` |
 | Troca de senha recusada | Senha fora da política de complexidade | Seguir a política definida |
 
+## Prints
+| 1 | 2 | 3 |
+|---|---|---|
+| ![antes](prints/config-rede-labnet.png) | ![diagnostico](prints/dominio-criado.png) | ![depois](prints/gpresult.png) |
+
 ## Vídeo
-[▶ Assistir demonstração](LINK_DO_VIDEO)
+[▶ Assistir demonstração(acesso a pasta)](https://youtu.be/TmryD-MwiSQ)
 
 ## Aprendizados
-- (escreva 3 a 5 pontos com suas palavras)
+- Criação de políticas que fazem sentido no meio corporativo.
+- Gerenciamento de todas as máquinas via rede.
+- Liberação de usuários de acordo com o nível de responsábilidade.
 
 [← Portfólio principal](../README.md)
