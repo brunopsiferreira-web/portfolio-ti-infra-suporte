@@ -83,8 +83,10 @@ Lê `usuarios.csv`, cria os usuários, adiciona aos grupos `GRP_<Departamento>` 
 | Criar usuários 2ª execução | Todos "PULADO" | ☐ |
 | Departamento inexistente no CSV | Erro registrado no log, sem travar | ☐ |
 
-## Vídeo
-[▶ Assistir demonstração](LINK_DO_VIDEO)
+## Prints
+| 1 | 2 | 3 |
+|---|---|---|
+| ![](prints/diagnostico-executando.png) | ![](prints/limpeza.png) | ![](prints/inventario.png) |
 
 ## Aprendizados
 - Comandos automatizados que ajudam tarefas do dia-a-dia.
