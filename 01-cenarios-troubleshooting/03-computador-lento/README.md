@@ -64,7 +64,7 @@ CPU volta ao normal e o sistema responde.
 ## Prints
 | Antes | Processos | Depois |
 |---|---|---|
-| ![antes](prints/cpu-100.png) | ![processos](prints/get-process.png) | ![depois](prints/cpu-normal.png) |
+| ![antes](prints/computador-lento-1.png) | ![processos](prints/computador-lento-2.png) | ![depois](prints/computador-lento-3.png) |
 
 ## Aprendizados
 - Verificar as configurações do computador(RAM, processador, placa de vídeo, etc.), poís isso pode interferir também no desempenho.
