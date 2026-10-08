@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-label="Projeto 3: Automação">
+  <rect x="1" y="1" width="398" height="238" rx="14" fill="#f8fdfb" stroke="#cfe6dc" stroke-width="2"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <circle cx="38" cy="42" r="15" fill="#bfe8d4"/>
+    <text x="38" y="48" font-size="16" font-weight="700" fill="#2f6b52" text-anchor="middle">3</text>
+    <text x="62" y="49" font-size="21" font-weight="700" fill="#3b4256">Automação</text>
+    <text x="24" y="84" font-size="15" fill="#6b7589">Batch · PowerShell · CSV</text>
+  </g>
+  <rect x="24" y="100" width="352" height="122" rx="8" fill="#ffffff" stroke="#d5e6de"/>
+  <circle cx="42" cy="115" r="4.5" fill="#f4b3b3"/><circle cx="58" cy="115" r="4.5" fill="#f6dc9a"/><circle cx="74" cy="115" r="4.5" fill="#a8dfc3"/>
+  <g font-family="Consolas, Menlo, monospace" font-size="12.5">
+    <text x="38" y="145" fill="#475569">&gt; .\criar_usuarios.ps1</text>
+    <text x="38" y="165" fill="#2f7d5b">[OK] ana.pereira criado em TI</text>
+    <text x="38" y="185" fill="#2f7d5b">[OK] bruno.mendes criado em RH</text>
+    <text x="38" y="205" fill="#9a6f1c">[PULADO] camila.rocha ja existe</text>
+  </g>
+</svg>

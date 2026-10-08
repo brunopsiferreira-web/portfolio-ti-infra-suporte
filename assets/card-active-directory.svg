@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-label="Projeto 2: Active Directory e GPO">
+  <rect x="1" y="1" width="398" height="238" rx="14" fill="#f9fbff" stroke="#d4def3" stroke-width="2"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <circle cx="38" cy="42" r="15" fill="#bcd7ff"/>
+    <text x="38" y="48" font-size="16" font-weight="700" fill="#2f4a7a" text-anchor="middle">2</text>
+    <text x="62" y="49" font-size="21" font-weight="700" fill="#3b4256">Active Directory + GPO</text>
+    <text x="24" y="84" font-size="15" fill="#6b7589">Domínio, OUs, políticas e chamados</text>
+    <g stroke="#b8c4d8" stroke-width="2" fill="none">
+      <path d="M200 132V142H90V150M200 142V150M200 142H310V150"/>
+      <path d="M90 176V184H50V192M90 184V192M90 184H130V192M310 176V184V192"/>
+    </g>
+    <g font-size="12.5" text-anchor="middle" fill="#475569">
+      <rect x="150" y="106" width="100" height="26" rx="6" fill="#bcd7ff" stroke="#8fb4ec"/><text x="200" y="124" fill="#2f4a7a" font-weight="700">lab.local</text>
+      <rect x="42" y="150" width="96" height="26" rx="6" fill="#ffffff" stroke="#c9d3e3"/><text x="90" y="168">Usuarios</text>
+      <rect x="152" y="150" width="96" height="26" rx="6" fill="#ffffff" stroke="#c9d3e3"/><text x="200" y="168">Computadores</text>
+      <rect x="262" y="150" width="96" height="26" rx="6" fill="#ffffff" stroke="#c9d3e3"/><text x="310" y="168">Grupos</text>
+      <rect x="30" y="192" width="40" height="24" rx="6" fill="#dbe8ff" stroke="#b6cdf5"/><text x="50" y="208">TI</text>
+      <rect x="76" y="192" width="40" height="24" rx="6" fill="#dbe8ff" stroke="#b6cdf5"/><text x="96" y="208">RH</text>
+      <rect x="122" y="192" width="48" height="24" rx="6" fill="#dbe8ff" stroke="#b6cdf5"/><text x="146" y="208">Fin.</text>
+      <rect x="278" y="192" width="64" height="24" rx="6" fill="#cdeedd" stroke="#9fd6bb"/><text x="310" y="208">GRP_*</text>
+      <rect x="196" y="192" width="64" height="24" rx="6" fill="#fbeab8" stroke="#e6cf86"/><text x="228" y="208">GPO</text>
+    </g>
+  </g>
+</svg>

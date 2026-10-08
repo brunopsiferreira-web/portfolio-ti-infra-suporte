@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" role="img" aria-label="Topologia do laboratório no VirtualBox">
+  <rect x="1" y="1" width="1098" height="558" rx="16" fill="#f8faff" stroke="#d4def3" stroke-width="2"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="550" y="40" font-size="22" font-weight="700" fill="#3b4256" text-anchor="middle">Topologia do laboratório</text>
+    <rect x="30" y="62" width="1040" height="470" rx="14" fill="none" stroke="#b8c4d8" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="48" y="86" font-size="14" fill="#7a8aa6">Computador host · VirtualBox</text>
+    <!-- conexões -->
+    <g stroke="#8fd0b6" stroke-width="3" fill="none"><path d="M240 250V318H430"/><path d="M860 250V318H670"/></g>
+    <path d="M550 346V400" stroke="#c4cedd" stroke-width="2" stroke-dasharray="5 5" fill="none" opacity="0"/>
+    <path d="M550 455H670" stroke="#9aa8bf" stroke-width="2" stroke-dasharray="5 5" fill="none"/>
+    <!-- switch -->
+    <rect x="430" y="290" width="240" height="56" rx="10" fill="#cdeedd" stroke="#7fc8a4" stroke-width="2"/>
+    <text x="550" y="314" font-size="16" font-weight="700" fill="#2f6b52" text-anchor="middle">Rede Interna · labnet</text>
+    <text x="550" y="334" font-size="13" fill="#3f7f65" text-anchor="middle" font-family="Consolas, Menlo, monospace">192.168.10.0/24</text>
+    <!-- DC -->
+    <rect x="90" y="120" width="300" height="130" rx="12" fill="#ffffff" stroke="#8fb4ec" stroke-width="2"/>
+    <path d="M90 154V132a12 12 0 0 1 12-12h276a12 12 0 0 1 12 12v22z" fill="#bcd7ff"/>
+    <text x="240" y="143" font-size="17" font-weight="700" fill="#2f4a7a" text-anchor="middle">SRV-DC01</text>
+    <g font-size="14" fill="#475569" text-anchor="middle"><text x="240" y="180">Windows Server 2022</text>
+    <text x="240" y="204" font-family="Consolas, Menlo, monospace" fill="#3a6fb0">192.168.10.10</text>
+    <text x="240" y="228" fill="#7a8aa6">AD DS · DNS · Arquivos (SMB) · GPO</text></g>
+    <!-- Cliente -->
+    <rect x="710" y="120" width="300" height="130" rx="12" fill="#ffffff" stroke="#8fb4ec" stroke-width="2"/>
+    <path d="M710 154V132a12 12 0 0 1 12-12h276a12 12 0 0 1 12 12v22z" fill="#bcd7ff"/>
+    <text x="860" y="143" font-size="17" font-weight="700" fill="#2f4a7a" text-anchor="middle">PC-CLI01</text>
+    <g font-size="14" fill="#475569" text-anchor="middle"><text x="860" y="180">Windows 11 Enterprise</text>
+    <text x="860" y="204" font-family="Consolas, Menlo, monospace" fill="#3a6fb0">192.168.10.20</text>
+    <text x="860" y="228" fill="#7a8aa6">Membro do domínio lab.local</text></g>
+    <!-- Troubleshooting VM -->
+    <rect x="250" y="400" width="300" height="110" rx="12" fill="#ffffff" stroke="#e8a671" stroke-width="2"/>
+    <path d="M250 434V412a12 12 0 0 1 12-12h276a12 12 0 0 1 12 12v22z" fill="#fcd5b5"/>
+    <text x="400" y="423" font-size="17" font-weight="700" fill="#8a4f1f" text-anchor="middle">VM de troubleshooting</text>
+    <g font-size="14" fill="#475569" text-anchor="middle"><text x="400" y="460">Windows 11 · rede NAT</text>
+    <text x="400" y="484" fill="#7a8aa6">Cenários do projeto 1</text></g>
+    <!-- Internet -->
+    <ellipse cx="760" cy="455" rx="90" ry="40" fill="#eef2f7" stroke="#c4cedd" stroke-width="2"/>
+    <text x="760" y="452" font-size="15" font-weight="700" fill="#475569" text-anchor="middle">Internet</text>
+    <text x="760" y="472" font-size="12.5" fill="#7a8aa6" text-anchor="middle">via NAT</text>
+  </g>
+</svg>
