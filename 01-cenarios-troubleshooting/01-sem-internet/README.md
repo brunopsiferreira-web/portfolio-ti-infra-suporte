@@ -6,7 +6,7 @@
 | Prioridade | Alta: o usuário não consegue trabalhar |
 | Ambiente | Windows 11 Enterprise em VirtualBox, rede NAT |
 | Ferramentas | `ipconfig`, `ping`, `netsh` |
-| Vídeo | [▶ Assistir](LINK_DO_VIDEO) |
+| Vídeo | [▶ Assistir](https://www.youtube.com/watch?v=82-pPgGI5r8) |
 
 ## Sintoma relatado
 > "Meu computador está conectado, mas nenhum site abre."
@@ -55,7 +55,7 @@ ping google.com      :: responde
 ## Prints
 | Antes | Durante | Depois |
 |---|---|---|
-| ![antes](prints/antes.png) | ![diagnostico](prints/diagnostico.png) | ![depois](prints/depois.png) |
+| ![antes](prints/sem-internet-2.png) | ![diagnostico](prints/sem-internet-1.png) | ![depois](prints/sem-internet-3.png) |
 
 ## Aprendizados
 - Diagnosticar por camadas evita "chutar" soluções
