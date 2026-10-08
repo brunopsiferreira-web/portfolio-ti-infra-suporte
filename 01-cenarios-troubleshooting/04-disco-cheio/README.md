@@ -53,7 +53,7 @@ Get-PSDrive C    # espaço livre aumentou
 ## Prints
 | Disco cheio | Maiores pastas | Depois da limpeza |
 |---|---|---|
-| ![antes](prints/antes.png) | ![pastas](prints/pastas.png) | ![depois](prints/depois.png) |
+| ![antes](prints/disco-cheio-1.png) | ![pastas](prints/disco-cheio-2.png) | ![depois](prints/disco-cheio-3.png) |
 
 ## Aprendizados
 - Evitar deixar arquivos descessários no computador, principalmente na pasta Downloads.
