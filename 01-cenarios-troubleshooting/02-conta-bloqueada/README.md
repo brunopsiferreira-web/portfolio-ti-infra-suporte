@@ -56,7 +56,7 @@ net accounts /lockoutthreshold:0
 ## Prints
 | Tentativas | Conta bloqueada | Desbloqueada |
 |---|---|---|
-| ![erro](prints/erro-login.png) | ![bloqueada](prints/bloqueada.png) | ![ok](prints/desbloqueada.png) |
+| ![erro](prints/conta-bloqueada-1.png) | ![bloqueada](prints/conta-bloqueada-2.png) | ![ok](prints/conta-bloqueada-3.png) |
 
 ## Aprendizados
 - Indetificar a causa raiz e tratar do problema de imediato.
