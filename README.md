@@ -24,7 +24,7 @@ Este repositório reúne laboratórios práticos que simulam problemas reais do 
   <tr valign="top">
     <td>Reprodução e diagnóstico de <b>4 incidentes</b> comuns: sem internet, DNS, conta bloqueada, PC lento e disco cheio.</td>
     <td>Domínio <code>lab.local</code> do zero: OUs, grupos, usuários, <b>GPOs</b>, pasta compartilhada com permissões por grupo e rotinas de suporte.</td>
-    <td>Scripts para <b>diagnóstico de rede, limpeza, inventário</b>, criação de usuários em lote no AD, backup e alerta de disco no Linux.</td>
+    <td>Scripts para <b>diagnóstico de rede, limpeza e inventário</b>.</td>
   </tr>
   <tr>
     <td align="center"><a href="01-cenarios-troubleshooting/">📖 Documentação</a></td>
