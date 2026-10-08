@@ -63,7 +63,7 @@ Cada linha leva direto à documentação do cenário e ao vídeo, sem precisar n
 ## 🧭 Active Directory + GPO
 
 <p align="center">
-  <img src="assets/card-active-directory.svg" alt="Active Directory" width="100%">
+  <img src="assets/card-active-directory.svg" alt="Active Directory" width="70%">
 </p>
 
 ---
@@ -71,7 +71,7 @@ Cada linha leva direto à documentação do cenário e ao vídeo, sem precisar n
 ## 🏗️ Ambiente do laboratório
 
 <p align="center">
-  <img src="assets/topologia-lab.svg" alt="Topologia do laboratório" width="85%">
+  <img src="assets/topologia-lab.svg" alt="Topologia do laboratório" width="70%">
 </p>
 
 ---
@@ -79,7 +79,7 @@ Cada linha leva direto à documentação do cenário e ao vídeo, sem precisar n
 ## </> Automação
 
 <p align="center">
-  <img src="assets/card-automacao.svg" alt="Automação" width="85%">
+  <img src="assets/card-automacao.svg" alt="Automação" width="70%">
 </p>
 
 ---
@@ -110,14 +110,13 @@ portfolio-ti-infra-suporte/
 ├── 01-cenarios-troubleshooting/
 │   ├── README.md                      ← índice + metodologia
 │   ├── CHEATSHEET.md                  ← cola de comandos
-│   ├── 01-sem-internet/   ... 09-impressora-ip-dinamico/
+│   ├── 01-sem-internet/
 ├── 02-active-directory/
 │   ├── README.md
 │   └── passo-a-passo.md
 └── 03-scripts-automacao/
     ├── README.md
     ├── windows/   (.bat, .ps1, .csv)
-    └── linux/     (.sh)
 ```
 </details>
 
