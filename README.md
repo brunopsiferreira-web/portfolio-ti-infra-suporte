@@ -11,15 +11,15 @@ Este repositório reúne laboratórios práticos que simulam problemas reais do 
   <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white" alt="Bash">
   <img src="https://img.shields.io/badge/VirtualBox-183A61?style=for-the-badge&logo=virtualbox&logoColor=white" alt="VirtualBox">
 </p>
----
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🗂️ Projetos
 
 <table>
   <tr>
-    <td width="33%"><a href="01-cenarios-troubleshooting/"><img src="assets/card-troubleshooting.svg" alt="Projeto 1: Troubleshooting"></a></td>
-    <td width="33%"><a href="02-active-directory/"><img src="assets/card-active-directory.svg" alt="Projeto 2: Active Directory e GPO"></a></td>
-    <td width="33%"><a href="03-scripts-automacao/"><img src="assets/card-automacao.svg" alt="Projeto 3: Automação"></a></td>
+    <td width="33%"><a href="01-cenarios-troubleshooting/">📋 Projeto 1: Troubleshooting</a></td>
+    <td width="33%"><a href="02-active-directory/">📋 Projeto 2: Active Directory e GPO></a></td>
+    <td width="33%"><a href="03-scripts-automacao/">📋 Projeto 3: Automação</a></td>
   </tr>
   <tr valign="top">
     <td>Reprodução e diagnóstico de <b>4 incidentes</b> comuns: sem internet, DNS, conta bloqueada, PC lento e disco cheio.</td>
@@ -27,9 +27,9 @@ Este repositório reúne laboratórios práticos que simulam problemas reais do 
     <td>Scripts para <b>diagnóstico de rede, limpeza, inventário</b>, criação de usuários em lote no AD, backup e alerta de disco no Linux.</td>
   </tr>
   <tr>
-    <td align="center"><a href="01-cenarios-troubleshooting/">📖 Documentação</a> · <a href="LINK_DO_VIDEO">▶ Vídeo</a></td>
-    <td align="center"><a href="02-active-directory/">📖 Documentação</a> · <a href="LINK_DO_VIDEO">▶ Vídeo</a></td>
-    <td align="center"><a href="03-scripts-automacao/">📖 Documentação</a> · <a href="LINK_DO_VIDEO">▶ Vídeo</a></td>
+    <td align="center"><a href="01-cenarios-troubleshooting/">📖 Documentação</a></td>
+    <td align="center"><a href="02-active-directory/">📖 Documentação</a></td>
+    <td align="center"><a href="03-scripts-automacao/">📖 Documentação</a></td>
   </tr>
 </table>
 
@@ -53,22 +53,17 @@ Cada linha leva direto à documentação do cenário e ao vídeo, sem precisar n
 
 | # | Problema | Camada | Ferramentas | Documentação | Vídeo |
 |:-:|---|---|---|:-:|:-:|
-| 1 | Sem internet (gateway incorreto) | Rede | `ipconfig` `ping` `netsh` | [Abrir](01-cenarios-troubleshooting/01-sem-internet/) | [▶](LINK_DO_VIDEO) |
-| 2 | Site não abre, ping por IP funciona (DNS) | Rede | `nslookup` `flushdns` | [Abrir](01-cenarios-troubleshooting/02-erro-dns/) | [▶](LINK_DO_VIDEO) |
-| 3 | Conflito de endereço IP | Rede | `arp` `eventvwr` | [Abrir](01-cenarios-troubleshooting/03-conflito-ip/) | [▶](LINK_DO_VIDEO) |
-| 4 | Conta de usuário bloqueada | Contas | `net user` | [Abrir](01-cenarios-troubleshooting/04-conta-bloqueada/) | [▶](LINK_DO_VIDEO) |
-| 5 | Computador lento | Desempenho | `Get-Process` | [Abrir](01-cenarios-troubleshooting/05-computador-lento/) | [▶](LINK_DO_VIDEO) |
-| 6 | Disco cheio | Armazenamento | `Get-PSDrive` `cleanmgr` | [Abrir](01-cenarios-troubleshooting/06-disco-cheio/) | [▶](LINK_DO_VIDEO) |
-| 7 | Impressora não imprime (fila travada) | Impressão | `sc query` `spooler` | [Abrir](01-cenarios-troubleshooting/07-impressora-nao-imprime/) | [▶](LINK_DO_VIDEO) |
-| 8 | Perfil de usuário corrompido | Windows | `regedit` | [Abrir](01-cenarios-troubleshooting/08-perfil-corrompido/) | [▶](LINK_DO_VIDEO) |
-| 9 | Impressora parou de imprimir (IP mudou: DHCP x IP fixo) | Rede / Impressão | `Test-NetConnection` `DHCP` | [Abrir](01-cenarios-troubleshooting/09-impressora-ip-dinamico/) | [▶](LINK_DO_VIDEO) |
+| 1 | Sem internet (gateway incorreto) | Rede | `ipconfig` `ping` `netsh` | [Abrir](01-cenarios-troubleshooting/01-sem-internet/) | [▶](https://www.youtube.com/watch?v=82-pPgGI5r8) |
+| 2 | Conta de usuário bloqueada | Contas | `net user` | [Abrir](01-cenarios-troubleshooting/02-conta-bloqueada/) | [▶](LINK_DO_VIDEO) |
+| 3 | Computador lento | Desempenho | `Get-Process` | [Abrir](01-cenarios-troubleshooting/03-computador-lento/) | [▶](LINK_DO_VIDEO) |
+| 4 | Disco cheio | Armazenamento | `Get-PSDrive` `cleanmgr` | [Abrir](01-cenarios-troubleshooting/04-disco-cheio/) | [▶](LINK_DO_VIDEO) |
 
 ---
 
-## 🧭 Como eu diagnostico
+## 🧭 Active Directory + GPO
 
 <p align="center">
-  <img src="assets/fluxo-diagnostico.svg" alt="Diagnóstico de rede em camadas" width="100%">
+  <img src="assets/card-active-directory.svg" alt="Active Directory" width="100%">
 </p>
 
 ---
@@ -81,6 +76,14 @@ Cada linha leva direto à documentação do cenário e ao vídeo, sem precisar n
 
 ---
 
+## </> Automação
+
+<p align="center">
+  <img src="assets/card-automacao.svg" alt="Automação" width="85%">
+</p>
+
+---
+
 ## 🧰 Tecnologias e o que pratiquei
 
 | Área | O que fiz | Ferramentas |
@@ -89,7 +92,6 @@ Cada linha leva direto à documentação do cenário e ao vídeo, sem precisar n
 | **Windows Server** | Controlador de domínio, DNS, compartilhamentos | AD DS, DNS, SMB, NTFS |
 | **Active Directory** | OUs, grupos, usuários, GPOs, reset e desbloqueio | `gpmc.msc` `Set-ADAccountPassword` `Unlock-ADAccount` |
 | **Automação** | Diagnóstico, limpeza, inventário, usuários em lote | Batch, PowerShell, Bash, cron |
-| **Linux** | Backup agendado e monitoramento de disco | Ubuntu Server, `tar`, `df`, `cron` |
 | **Virtualização** | Laboratório com snapshots e redes isoladas | VirtualBox |
 
 ### 💡 Diferencial
@@ -122,10 +124,3 @@ portfolio-ti-infra-suporte/
 > Todos os usuários, senhas, domínios e IPs usados nos laboratórios são **fictícios**.
 
 ---
-
-## 📫 Contato
-
-<p align="center">
-  <a href="https://linkedin.com/in/brunobarrosof"><img src="https://img.shields.io/badge/LinkedIn-brunobarrosof-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  <a href="mailto:bruno.barrosof@outlook.com"><img src="https://img.shields.io/badge/E--mail-bruno.barrosof%40outlook.com-0078D4?style=for-the-badge&logo=microsoftoutlook&logoColor=white" alt="E-mail"></a>
-</p>
