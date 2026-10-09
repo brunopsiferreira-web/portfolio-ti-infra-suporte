@@ -74,14 +74,14 @@ Lê `usuarios.csv`, cria os usuários, adiciona aos grupos `GRP_<Departamento>` 
 
 ## Testes realizados
 
-| Teste | Resultado esperado | Resultado |
-|---|---|---|
-| Diagnóstico com DNS correto e com DNS quebrado | Falha de nslookup registrada no segundo | ☐ |
-| Limpeza com arquivos temporários criados | Espaço liberado informado | ☐ |
-| Inventário em 2 máquinas | 2 linhas no CSV | ☐ |
-| Criar usuários 1ª execução | 5 usuários criados | ☐ |
-| Criar usuários 2ª execução | Todos "PULADO" | ☐ |
-| Departamento inexistente no CSV | Erro registrado no log, sem travar | ☐ |
+| Teste | Resultado esperado |
+|---|---|
+| Diagnóstico com DNS correto e com DNS quebrado | Falha de nslookup registrada no segundo |
+| Limpeza com arquivos temporários criados | Espaço liberado informado |
+| Inventário em 2 máquinas | 2 linhas no CSV |
+| Criar usuários 1ª execução | 5 usuários criados |
+| Criar usuários 2ª execução | Todos "PULADO" |
+| Departamento inexistente no CSV | Erro registrado no log, sem travar |
 
 ## Prints
 | 1 | 2 | 3 |
