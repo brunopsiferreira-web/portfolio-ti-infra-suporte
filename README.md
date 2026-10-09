@@ -18,7 +18,7 @@ Este repositório reúne laboratórios práticos que simulam problemas reais do 
 <table>
   <tr>
     <td width="33%"><a href="01-cenarios-troubleshooting/">📋 Projeto 1: Troubleshooting</a></td>
-    <td width="33%"><a href="02-active-directory/">📋 Projeto 2: Active Directory e GPO></a></td>
+    <td width="33%"><a href="02-active-directory/">📋 Projeto 2: Active Directory e GPO</a></td>
     <td width="33%"><a href="03-scripts-automacao/">📋 Projeto 3: Automação</a></td>
   </tr>
   <tr valign="top">
