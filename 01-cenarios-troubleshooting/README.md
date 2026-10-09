@@ -13,10 +13,10 @@ Simular e documentar 4 incidentes comuns de help desk, aplicando diagnóstico es
 
 | # | Problema | Categoria | Ferramentas principais | Documentação | Vídeo |
 |---|---|---|---|---|---|
-| 1 | Sem internet (gateway incorreto) | Rede | `ipconfig`, `ping`, `netsh` | [Abrir](01-sem-internet/) | [▶](LINK_DO_VIDEO) |
-| 2 | Conta de usuário bloqueada | Contas | `net user`, `net accounts` | [Abrir](02-conta-bloqueada/) | [▶](LINK_DO_VIDEO) |
-| 3 | Computador lento | Desempenho | `Get-Process`, Gerenciador de Tarefas | [Abrir](03-computador-lento/) | [▶](LINK_DO_VIDEO) |
-| 4 | Disco cheio | Armazenamento | `Get-PSDrive`, `cleanmgr` | [Abrir](04-disco-cheio/) | [▶](LINK_DO_VIDEO) |
+| 1 | Sem internet (gateway incorreto) | Rede | `ipconfig`, `ping`, `netsh` | [Abrir](01-sem-internet/) | [▶](https://youtu.be/82-pPgGI5r8) |
+| 2 | Conta de usuário bloqueada | Contas | `net user`, `net accounts` | [Abrir](02-conta-bloqueada/) | [▶](https://youtu.be/afGEmjUGr0Q) |
+| 3 | Computador lento | Desempenho | `Get-Process`, Gerenciador de Tarefas | [Abrir](03-computador-lento/) | [▶](https://youtu.be/g6M5FmyJHlQ) |
+| 4 | Disco cheio | Armazenamento | `Get-PSDrive`, `cleanmgr` | [Abrir](04-disco-cheio/) | [▶](https://youtu.be/vycYgaiN3Ug) |
 
 
 ## Metodologia de diagnóstico
